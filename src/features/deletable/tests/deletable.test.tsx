@@ -97,6 +97,19 @@ describe("SkillItem", () => {
     expect(screen.getAllByTestId(/delete-button/i)[0]).toBeInTheDocument();
   });
 
+  test("should unselect items correctly", async () => {
+    const user = userEvent.setup();
+    renderComponent();
+
+    await user.click(screen.getByTestId(/start-selection-button/i));
+    const selectButtons = screen.getAllByTestId(/select-button/i);
+    await user.click(selectButtons[0]);
+    await user.click(selectButtons[2]);
+    await user.click(selectButtons[2]);
+    expect(screen.getByText(mockItems[0].name)).toBeDisabled();
+    expect(screen.getByText(mockItems[2].name)).not.toBeDisabled();
+  });
+
   test("should cancel selection correctly", async () => {
     const user = userEvent.setup();
     renderComponent();

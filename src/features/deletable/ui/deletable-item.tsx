@@ -36,17 +36,19 @@ export const DeletableItem: React.FC<PropsWithChildren<DeletableItemProps>> = ({
     selectedItems.find((selectedId) => selectedId === id) !== undefined;
 
   if (isValidElement<{ isDisabled: boolean }>(children)) {
-    console.log("asdasdsada");
-
     children = cloneElement(children, { isDisabled: isSelected });
-    if (isSelected) console.log(children);
   }
 
   const onSetSelectedItem = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation();
-    isSelected ? removeSelectedItem(id) : addSelectedItem(id);
+    
+    if (isSelected) {
+      removeSelectedItem(id);
+    } else {
+      addSelectedItem(id);
+    }
   };
 
   const onDeleteConfirm = () => onDeleteItems([id]);

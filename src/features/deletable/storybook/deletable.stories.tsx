@@ -16,21 +16,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-
-interface ButtonMockProps {
-  text: string;
-  isDiabled?: boolean;
-}
-
-
-const ButtonMock: React.FC<ButtonMockProps> = ({ text, isDiabled }) => {
-  return (
-    <button  disabled={isDiabled}>
-      {text}
-    </button>
-  );
-};
-
 export const Deleteble: Story = {
   render: () => {
     const [items, setItems] = useState(mockItems);
